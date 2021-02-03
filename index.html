@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Booking</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/fontawesome.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!--Header and Menu Section-->
+    <header class="container">
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a class="active" href="#">Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!--Booking Section-->
+    <main class="main-content container">
+        <div class="booking-form">
+            <h3>Booking Flights</h3>
+            <div class="input-group">
+                <label for="">Flying From</label>
+                <input class="inp-style" type="text" name="" placeholder="Dhake, Bangladesh">
+            </div>
+            <div class="input-group">
+                <label for="">Flying To</label>
+                <input class="inp-style" type="text" name="" placeholder="New York, United States">
+            </div>
+            <div class="inputs">
+                <div class="input-group">
+                    <label" for="">Departure</label>
+                        <input class="inp-style" type="date" name="" value="0">
+                </div>
+                <div class="input-group">
+                    <label for="">Return</label>
+                    <input class="inp-style inp-width" type="date" name="">
+                </div>
+            </div>
+
+
+            <div class="input-group f-class">
+                <div>
+                    <label for="">First Class ($150)</label>
+                    <input id="firstClass-input" class="inp-style inp-width" type="number" name="" value="0">
+                </div>
+                <div class="plus-minus-btn">
+                    <p>
+                        <button onclick="onChange('firstClass', true)">
+                            <span><i class="fas fa-plus-circle"></i></span>
+                        </button>
+                        <button onclick="onChange('firstClass', false)">
+                            <span><i class="fas fa-minus-circle"></i></span>
+                        </button>
+                    </p>
+                </div>
+            </div>
+
+
+
+            <div class="input-group f-class">
+                <div>
+                    <label for="">Economy ($100)</label>
+                    <input id="economicClass-input" class="inp-style inp-width" type="number" name="" value="0">
+                </div>
+                <div class="plus-minus-btn">
+                    <p><button onclick="onChange('economicClass' , true)">
+                            <span><i class="fas fa-plus-circle"></i></span>
+                        </button>
+                        <button onclick="onChange('economicClass' , false)">
+                            <span><i class="fas fa-minus-circle"></i></span>
+                        </button>
+                    </p>
+                </div>
+            </div>
+
+
+            <div class="calculations">
+                <div class="amount">
+                    <div class="left">
+                        <p>Subtotal</p>
+                    </div>
+                    <div class="right">
+                        <p id="sub-total-Amount">$00</p>
+                    </div>
+                </div>
+
+                <div class="amount">
+                    <div class="left">
+                        <p>Charge 10% VAT</p>
+                    </div>
+                    <div class="right">
+                        <p id='charge-vat'>$00</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="amount">
+                    <div class="left">
+                        <h4>Total</h4>
+                    </div>
+                    <div class="right">
+                        <p id="grand-total">$00</p>
+                    </div>
+                </div>
+            </div>
+            <button class="btn-style">Book Now</button>
+        </div>
+
+        <div class="booking-content">
+            <h1>discover <br> around the world</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicingelit. Provident voluptatibus quam fuga laborumalias
+                veniam libero autem quasi maxime ullam vero nama imi dolor, architecto ab facilis eaque deserunt nobise
+                voluptatibus quam</p>
+        </div>
+        </section>
+
+        <!--Thank You-->
+</body>
+<script>
+    function onChange(product, isIncrease) {
+
+        const productInput = getInputValue(product);
+        
+        let productCount = productInput;
+        if (isIncrease == true) {
+            productCount = productInput + 1;
+        }
+
+        if (isIncrease == false && productCount>0) {
+            productCount = productInput - 1;
+        }
+        document.getElementById(product + '-input').value =productCount;
+        calculateTotal();
+    
+    };
+  function calculateTotal (){
+      const firstClassInput= getInputValue('firstClass');
+      const economicClassInput= getInputValue('economicClass');
+      let subTotal = firstClassInput * 150 + economicClassInput*100;
+      document.getElementById('sub-total-Amount').innerText = '$' + subTotal;
+      const tax = Math.round(subTotal *0.1);
+      document.getElementById('charge-vat').innerText= '$' + tax;
+      let grandTotal = tax + subTotal;
+      document.getElementById('grand-total').innerText = grandTotal;
+      console.log(grandTotal)
+
+  }
+
+    function getInputValue(product) {
+        const productInputFunc = document.getElementById(product + '-input');
+        const productNumber = parseInt(productInputFunc.value);
+        return productNumber;
+    };
+</script>
+
+</html>
